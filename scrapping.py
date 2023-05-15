@@ -65,4 +65,5 @@ for link in links:
 hockey_team_df = pd.concat(temp_dfs, axis=0).reset_index()
 hockey_team_df.sort_values(["year", "name"], inplace=True)
 
+
 hockey_team_df.to_sql('hockey',con=engine,if_exists="replace",index=False)
