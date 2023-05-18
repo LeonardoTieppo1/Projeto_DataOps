@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 import re
 import pymysql
 from sqlalchemy import create_engine
-
 import mysql.connector
 
 # Defina a string de conexão com o banco de dados
