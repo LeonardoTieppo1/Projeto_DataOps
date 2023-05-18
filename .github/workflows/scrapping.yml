@@ -22,6 +22,7 @@ jobs:
           pip install pymysql
           pip install sqlalchemy
           pip install mysql-connector-python
+          
     - name: execute py script  
       run: 
         python scrapping.py
