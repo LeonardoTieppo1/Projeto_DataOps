@@ -15,6 +15,7 @@ conn = mysql.connector.connect(
     user='root',
     password='123456',
     host='localhost',
+    port='3306',
     database='projetodo'
 )
 
@@ -27,7 +28,7 @@ else:
 # Feche a conexão com o banco de dados
 conn.close()
 
-engine = create_engine("mysql+pymysql://root:123456@localhost/projetodo")
+engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
 
 def scrape_this(uri="/pages/forms/"):
   page = requests.get("https://scrapethissite.com" + uri)
