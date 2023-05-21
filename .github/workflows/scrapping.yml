@@ -22,6 +22,9 @@ jobs:
           pip install pymysql
           pip install sqlalchemy
           pip install mysql-connector-python
+          pip install google-auth
+          pip install google-cloud-storage
+          
     - name: execute py script  
       run: 
         python scrapping.py --host=localhost --user=root --password=123456 --database=projetodo --port=3306
