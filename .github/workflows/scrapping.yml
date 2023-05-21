@@ -29,5 +29,6 @@ jobs:
           DB_PORT: 3306
           DB_USER: root
           DB_PASSWORD: 123456
+          DB_DATABASE: projetodo
       run: 
             python scrapping.py
