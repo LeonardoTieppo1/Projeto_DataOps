@@ -2,33 +2,14 @@
 # pip install requests
 # pip install beautifulsoup4
 
+import io
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import re
 from google.cloud import storage
 from google.oauth2 import service_account
-import pymysql
 from sqlalchemy import create_engine
-import mysql.connector
-
-# Defina a string de conexão com o banco de dados
-# conn = mysql.connector.connect(
-#     user='root',
-#     password='123456',
-#     host='localhost',
-#     port='3306',
-#     database='projetodo'
-# )
-
-# # Verifique a conexão com o banco de dados
-# if conn.is_connected():
-#     print("Conexão com o banco de dados bem-sucedida!")
-# else:
-#     print("Não foi possível conectar ao banco de dados.")
-
-# # Feche a conexão com o banco de dados
-# conn.close()
 
 engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
 
@@ -67,13 +48,6 @@ for link in links:
 hockey_team_df = pd.concat(temp_dfs, axis=0).reset_index()
 hockey_team_df.sort_values(["year", "name"], inplace=True)
 
-data_sql=hockey_team_df.to_sql("hockey",con=engine,if_exists="replace",index=False)
-
-sql_path=r'C:\Users\DELL\Documents\ESPM\disciplinas-2023.1\dataops\projeto\hockey.sql'
-
-with open(sql_path, "w") as file:
-    file.write(str(data_sql))
-
 credentials_dict={  
   "type": "service_account",
   "project_id": "model-calling-343600",
@@ -92,5 +66,7 @@ storage_client = storage.Client(credentials=credentials)
 bucket = storage_client.get_bucket('atividade4_dataops_names')
 blob = bucket.blob('hockey.sql')
 
-
-blob.upload_from_filename(sql_path,content_type="application/sql")
+hockey_team_df.to_sql("hockey",con=engine,if_exists="replace",index=False)
+data_sql=hockey_team_df.astype(str)
+data_sql_str=data_sql.to_string(index=False)
+blob.upload_from_string(data_sql_str.encode('utf-8'),content_type="application/sql")
