@@ -30,7 +30,7 @@ import mysql.connector
 # # Feche a conexão com o banco de dados
 # conn.close()
 
-# engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
+engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
 
 def scrape_this(uri="/pages/forms/"):
   page = requests.get("https://scrapethissite.com" + uri)
@@ -67,7 +67,12 @@ for link in links:
 hockey_team_df = pd.concat(temp_dfs, axis=0).reset_index()
 hockey_team_df.sort_values(["year", "name"], inplace=True)
 
-#hockey_team_df.to_sql("hockey", con=engine, if_exists="replace",index=False)
+data_sql=hockey_team_df.to_sql("hockey",con=engine,if_exists="replace",index=False)
+
+sql_path=r'C:\Users\DELL\Documents\ESPM\disciplinas-2023.1\dataops\projeto\hockey.sql'
+
+with open(sql_path, "w") as file:
+    file.write(str(data_sql))
 
 credentials_dict={  
   "type": "service_account",
@@ -86,6 +91,6 @@ credentials =service_account.Credentials.from_service_account_info(credentials_d
 storage_client = storage.Client(credentials=credentials)
 bucket = storage_client.get_bucket('atividade4_dataops_names')
 blob = bucket.blob('hockey.sql')
-sql_path=r'C:\Users\DELL\Documents\dumps\hockey.sql'
+
 
 blob.upload_from_filename(sql_path,content_type="application/sql")
