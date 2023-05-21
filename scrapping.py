@@ -13,24 +13,24 @@ from sqlalchemy import create_engine
 import mysql.connector
 
 # Defina a string de conexão com o banco de dados
-conn = mysql.connector.connect(
-    user='root',
-    password='123456',
-    host='localhost',
-    port='3306',
-    database='projetodo'
-)
+# conn = mysql.connector.connect(
+#     user='root',
+#     password='123456',
+#     host='localhost',
+#     port='3306',
+#     database='projetodo'
+# )
 
-# Verifique a conexão com o banco de dados
-if conn.is_connected():
-    print("Conexão com o banco de dados bem-sucedida!")
-else:
-    print("Não foi possível conectar ao banco de dados.")
+# # Verifique a conexão com o banco de dados
+# if conn.is_connected():
+#     print("Conexão com o banco de dados bem-sucedida!")
+# else:
+#     print("Não foi possível conectar ao banco de dados.")
 
-# Feche a conexão com o banco de dados
-conn.close()
+# # Feche a conexão com o banco de dados
+# conn.close()
 
-engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
+# engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
 
 def scrape_this(uri="/pages/forms/"):
   page = requests.get("https://scrapethissite.com" + uri)
@@ -67,7 +67,7 @@ for link in links:
 hockey_team_df = pd.concat(temp_dfs, axis=0).reset_index()
 hockey_team_df.sort_values(["year", "name"], inplace=True)
 
-hockey_team_df.to_sql("hockey", con=engine, if_exists="replace",index=False)
+#hockey_team_df.to_sql("hockey", con=engine, if_exists="replace",index=False)
 
 credentials_dict={  
   "type": "service_account",
