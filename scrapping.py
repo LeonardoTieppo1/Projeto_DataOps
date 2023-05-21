@@ -2,7 +2,7 @@
 # pip install requests
 # pip install beautifulsoup4
 
-import io
+
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -10,6 +10,7 @@ import re
 from google.cloud import storage
 from google.oauth2 import service_account
 from sqlalchemy import create_engine
+import pymysql
 
 engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
 
