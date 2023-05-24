@@ -10,9 +10,9 @@ import re
 from google.cloud import storage
 from google.oauth2 import service_account
 from sqlalchemy import create_engine
-import pymysql
 
-engine = create_engine("mysql+pymysql://root:123456@localhost:3306/projetodo")
+
+engine = create_engine("sqlite://")
 
 def scrape_this(uri="/pages/forms/"):
   page = requests.get("https://scrapethissite.com" + uri)
