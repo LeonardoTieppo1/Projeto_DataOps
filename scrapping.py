@@ -8,6 +8,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from sqlalchemy import create_engine
+import pymysql
 
 
 db_connection= ("mysql+pymysql://localhost:123456@34.66.185.113/projetodo")

@@ -19,6 +19,7 @@ jobs:
           pip install beautifulsoup4 requests
           pip install pandas
           pip install sqlalchemy
+          pip install pymysql
 
     - name: execute py script  
       run: 
