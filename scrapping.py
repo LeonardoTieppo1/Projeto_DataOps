@@ -29,7 +29,6 @@ def scrape_this(uri="/pages/forms/"):
 
   data_df = pd.DataFrame(parsed_data)
   return data_df
-
 page = requests.get("https://scrapethissite.com/pages/forms/")
 soup = BeautifulSoup(page.text, "html.parser")
 pagination = soup.find("ul", attrs={"class": "pagination"})
